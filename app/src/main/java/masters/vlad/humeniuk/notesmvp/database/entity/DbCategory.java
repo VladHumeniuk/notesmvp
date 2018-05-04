@@ -6,20 +6,9 @@ import android.arch.persistence.room.PrimaryKey;
 @Entity
 public class DbCategory {
 
-    public interface Columns {
-
-        String ID = "id";
-
-        String NAME = "name";
-
-        String COLOR = "color";
-    }
-
     @PrimaryKey(autoGenerate = true)
     private long id;
-
     private String name;
-
     private String color;
 
     public long getId() {
@@ -44,5 +33,22 @@ public class DbCategory {
 
     public void setColor(String color) {
         this.color = color;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof DbCategory
+                && id == ((DbCategory) obj).getId()
+                && name.equals(((DbCategory) obj).getName())
+                && color.equals(((DbCategory) obj).getColor());
+    }
+
+    public interface Columns {
+
+        String ID = "id";
+
+        String NAME = "name";
+
+        String COLOR = "color";
     }
 }

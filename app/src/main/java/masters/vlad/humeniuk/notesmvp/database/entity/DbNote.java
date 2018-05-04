@@ -12,32 +12,12 @@ import static android.arch.persistence.room.ForeignKey.CASCADE;
         onDelete = CASCADE))
 public class DbNote {
 
-    public interface Columns {
-
-        String ID = "id";
-
-        String TITLE = "title";
-
-        String DESCRIPTION = "description";
-
-        String DATE_CREATED = "dateCreated";
-
-        String DATE_LAST_EDIT = "dateLastEdit";
-
-        String CATEGORY_ID = "categoryId";
-    }
-
     @PrimaryKey(autoGenerate = true)
     private long id;
-
     private String title;
-
     private String description;
-
     private long dateCreated;
-
     private long dateLastEdit;
-
     private long categoryId;
 
     public long getId() {
@@ -86,5 +66,31 @@ public class DbNote {
 
     public void setCategoryId(long categoryId) {
         this.categoryId = categoryId;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof DbNote
+                && id == ((DbNote) obj).getId()
+                && title.equals(((DbNote) obj).getTitle())
+                && description.equals(((DbNote) obj).getDescription())
+                && dateCreated == ((DbNote) obj).getDateCreated()
+                && dateLastEdit == ((DbNote) obj).getDateLastEdit()
+                && categoryId == ((DbNote) obj).getCategoryId();
+    }
+
+    public interface Columns {
+
+        String ID = "id";
+
+        String TITLE = "title";
+
+        String DESCRIPTION = "description";
+
+        String DATE_CREATED = "dateCreated";
+
+        String DATE_LAST_EDIT = "dateLastEdit";
+
+        String CATEGORY_ID = "categoryId";
     }
 }
